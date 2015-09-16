@@ -9,6 +9,13 @@ case class Train(info:TrainInfo, schedule:Seq[(Time, Station)]) {
   def timeAt(station: Station): Option[Time] =
     schedule.find(stop => stop._2 == station).map(found => found._1)
 
+  def canSchedule(from:Station, to: Station, departure: Time) = false
+
+  def backToBack(): Seq[(Station, Station)] = {
+    val stations = schedule.map(_._2)
+    stations.zip(stations.tail)
+  }
+
 }
 
 case class Station(name:String)
