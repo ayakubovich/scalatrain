@@ -6,11 +6,11 @@ package com.typesafe.training.scalatrain
 case class Hop (from: Station, to: Station, train: Train) {
   require(train.stations.contains(from))
   require(train.stations.contains(to))
-  require(departure > arrival)
 
   val departure: Time= train.timeAt(from).get
   //val departure: Time= train.schedule.find(_._2== from).headOption.getOrElse(throw new IllegalArgumentException)
 
   val arrival: Time= train.timeAt(to).get
 
+  require(departure < arrival)
 }
