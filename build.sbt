@@ -10,6 +10,9 @@ scalaVersion := Version.scala
 resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 
 libraryDependencies ++= Dependencies.scalaTrain
+libraryDependencies ++= Seq(
+  "org.scalatest" %% "scalatest" % "2.1.4" % "test"
+)
 
 scalacOptions ++= List(
   "-unchecked",
@@ -19,6 +22,6 @@ scalacOptions ++= List(
   "-encoding", "UTF-8"
 )
 
-//initialCommands in console := "import com.typesafe.training.scalatrain._"
+initialCommands in console := "import com.typesafe.training.scalatrain._"
 
-//initialCommands in (Test, console) := (initialCommands in console).value + ",TestData._"
+initialCommands in (Test, console) := (initialCommands in console).value + ",TestData._"
