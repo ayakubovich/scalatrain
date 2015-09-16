@@ -53,4 +53,7 @@ object TestData {
   )
 
   val planner = new JourneyPlanner(Set(ice724, ice726))
+
+  val ice724HopMunich2Nuremburg = new Hop(munich, nuremberg, ice724)
+
 }

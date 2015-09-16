@@ -3,15 +3,25 @@
  */
 
 package com.typesafe.training.scalatrain
-
+import org.scalatest.{ Matchers, WordSpec }
 import TestData._
 import java.lang.{ IllegalArgumentException => IAE }
-import org.scalatest.{ Matchers, WordSpec }
-
 class TrainSpec extends WordSpec with Matchers {
 
-  "Train ice724" should {
+  "Starting a trip from Munich to Frankfurt at 7:49" should {
     "stop in Nurember" in {
+      ice724.timeAt(nuremberg) shouldEqual Some(ice724NurembergTime)
+    }
+    "not stop in Essen" in {
+      ice724.timeAt(essen) shouldEqual None
+    }
+  }
+
+  //////
+
+
+  "Train ice724" should {
+    "stop in Nuremberg" in {
       ice724.timeAt(nuremberg) shouldEqual Some(ice724NurembergTime)
     }
     "not stop in Essen" in {
@@ -40,4 +50,13 @@ class TrainSpec extends WordSpec with Matchers {
       ice724.stations shouldEqual Vector(munich, nuremberg, frankfurt, cologne)
     }
   }
+
+  "Calling hops on Train ice724" should {
+    "should correspond to its schedule: munich > nuremubrg > frankfurt > cologne" {
+      ice724.hops shouldEqual Seq((munich, nuremburg, ice724), (nuremburg, frankfurt, ice724), (frankfurt, essen,ice724))
+    }
+  }
+
 }
+
+import org.scalatest.{ Matchers, WordSpec }
