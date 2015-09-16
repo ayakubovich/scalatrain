@@ -22,3 +22,6 @@ case class Train(info:TrainInfo, schedule:Seq[(Time, Station)]) {
 }
 
 case class Station(name:String)
+{
+  override def toString() = name
+}

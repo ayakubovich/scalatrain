@@ -13,4 +13,6 @@ case class Hop (from: Station, to: Station, train: Train) {
   val arrival: Time= train.timeAt(to).get
 
   require(departure < arrival)
+
+  override lazy val toString = from.toString + "-" + to.toString
 }
