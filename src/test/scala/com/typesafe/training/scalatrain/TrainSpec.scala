@@ -24,6 +24,9 @@ class TrainSpec extends WordSpec with Matchers {
     "stop in Nuremberg" in {
       ice724.timeAt(nuremberg) shouldEqual Some(ice724NurembergTime)
     }
+    "stop in Munich" in {
+      ice724.timeAt(munich) shouldEqual Some(ice724MunichTime)
+    }
     "not stop in Essen" in {
       ice724.timeAt(essen) shouldEqual None
     }

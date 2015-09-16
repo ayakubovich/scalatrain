@@ -10,7 +10,7 @@ case class Train(info:TrainInfo, schedule:Seq[(Time, Station)]) {
     schedule.find(stop => stop._2 == station).map(found => found._1)
 
   def genHop(from:Station, to: Station, departure: Time): Seq[Hop] =
-    hops.dropWhile(hop => !(hop.from == from && hop.departure > departure)).takeWhile(_.to != to)
+    hops.dropWhile(hop => !(hop.from == from && hop.departure > departure)).reverse.dropWhile(_.to != to).reverse
 
   def backToBack: Seq[(Station, Station)] = {
     val stations = schedule.map(_._2)
