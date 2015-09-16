@@ -9,12 +9,15 @@ case class Train(info:TrainInfo, schedule:Seq[(Time, Station)]) {
   def timeAt(station: Station): Option[Time] =
     schedule.find(stop => stop._2 == station).map(found => found._1)
 
-  def canSchedule(from:Station, to: Station, departure: Time) = false
+  def genHop(from:Station, to: Station, departure: Time): Seq[Hop] =
+    hops.dropWhile(hop => !(hop.from == from && hop.departure > departure)).takeWhile(_.to != to)
 
-  def backToBack(): Seq[(Station, Station)] = {
+  def backToBack: Seq[(Station, Station)] = {
     val stations = schedule.map(_._2)
     stations.zip(stations.tail)
   }
+
+  def hops: Seq[Hop] = backToBack.map { case (s1,s2) => Hop(s1,s2, this) }
 
 }
 
