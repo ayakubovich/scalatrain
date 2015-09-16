@@ -52,8 +52,8 @@ class TrainSpec extends WordSpec with Matchers {
   }
 
   "Calling hops on Train ice724" should {
-    "should correspond to its schedule: munich > nuremubrg > frankfurt > cologne" {
-      ice724.hops shouldEqual Seq((munich, nuremburg, ice724), (nuremburg, frankfurt, ice724), (frankfurt, essen,ice724))
+    "should correspond to its schedule: munich > nuremubrg > frankfurt > cologne" in {
+      ice724.hops shouldEqual Seq((munich, nuremberg, ice724), (nuremberg, frankfurt, ice724), (frankfurt, essen,ice724))
     }
   }
 

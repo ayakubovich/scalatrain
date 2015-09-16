@@ -28,8 +28,7 @@ class JourneyPlanner(val trains:Set[Train]){
     (time, train)
 
   def plan(from: Station, to: Station, departure: Time): Set[Seq[Hop]] =
-  if (from == to) Set.empty
-  else trains.map(_.genHop(from, to , departure))
+    trains.map(_.genHop(from, to , departure)).filter(!_.isEmpty)
 
   val hops:Map[Station, Set[Hop]] = trains.flatMap(_.hops).groupBy(_.from)
 }
