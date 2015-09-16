@@ -27,12 +27,6 @@ class HopSpec extends WordSpec with Matchers {
     }
   }
 
-  "Every Hop" should {
-    "should arrive at its destination AFTER it leaves its source " in {
-      ice724HopMunich2Nuremburg.from shouldEqual Vector(munich, nuremberg, frankfurt, cologne)
-    }
-  }
-
 }
 
 import org.scalatest.{ Matchers, WordSpec }
