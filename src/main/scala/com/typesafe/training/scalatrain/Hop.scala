@@ -8,6 +8,7 @@ case class Hop (from: Station, to: Station, train: Train) {
   require(train.stations.contains(to))
 
   val departure: Time= train.timeAt(from).get
+  //val departure: Time= train.schedule.find(_._2== from).headOption.getOrElse(throw new IllegalArgumentException)
 
   val arrival: Time= train.timeAt(to).get
 

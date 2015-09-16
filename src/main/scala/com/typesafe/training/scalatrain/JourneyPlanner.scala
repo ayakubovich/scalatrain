@@ -27,9 +27,9 @@ class JourneyPlanner(val trains:Set[Train]){
     yield
     (time, train)
 
-  def plan(from: Station, to: Station, departure: Time) : Set[Train] = trains.filter(_.canSchedule(from, to, departure))
+  def plan(from: Station, to: Station, departure: Time): Set[Seq[Hop]] =
+  if (from == to) Set.empty
+  else trains.map(_.genHop(from, to , departure))
 
-  val hops:Map[Station, Set[Hop]] = trains.flatMap(train => train.backToBack().map(
-    p=> Hop(p._1,p._2, train)
-  )).groupBy(_.from)
+  val hops:Map[Station, Set[Hop]] = trains.flatMap(_.hops).groupBy(_.from)
 }
