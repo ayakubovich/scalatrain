@@ -9,8 +9,16 @@ case class Train(info:TrainInfo, schedule:Seq[(Time, Station)]) {
   def timeAt(station: Station): Option[Time] =
     schedule.find(stop => stop._2 == station).map(found => found._1)
 
-  def genHop(from:Station, to: Station, departure: Time): Seq[Hop] =
-    hops.dropWhile(hop => !(hop.from == from && hop.departure > departure)).reverse.dropWhile(_.to != to).reverse
+  def genHop(from:Station, to: Station, departure: Time): Seq[Hop] = {
+    val fromIx = this.schedule.indexWhere(s => s._2 == from & s._1 > departure)
+    val toIx = this.schedule.indexWhere(_._2 == to)
+    if (fromIx != -1){
+      hops.slice(fromIx, toIx)
+    } else{
+      Seq.empty[Hop]
+    }
+  }
+    //hops.dropWhile(hop => !(hop.from == from && hop.departure > departure)).reverse.dropWhile(_.to != to).reverse
 
   def backToBack: Seq[(Station, Station)] = {
     val stations = schedule.map(_._2)
