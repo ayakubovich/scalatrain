@@ -1,7 +1,7 @@
 package com.typesafe.training.scalatrain
 import com.github.nscala_time.time.Imports._
 
-case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Set[Int] = Set.empty, exceptionDate:Set[DateTime] = Set.empty){
+case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Set[Int] = Set.empty, exceptionDates:Set[DateTime] = Set.empty){
 
   require(schedule.length > 1, "Required schedule to be of sequence of length > 2, got a sequence of length " + schedule.length)
   require(schedule.forall(_._3 >= 0), "Price can not be negative")
