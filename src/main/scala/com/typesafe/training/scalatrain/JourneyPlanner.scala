@@ -46,4 +46,7 @@ object JourneyPlanner {
   def sortPathsByTime (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{ case path: Seq[Hop] => path(path.size-1).arrival - path(0).departure}
 
   def sortPathsByPrice (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{ case path: Seq[Hop] => path.map(_.price).sum}
+
+  //def applyDateDiscountToPrice(paths, date):Set[Seq[Hop]]
+
 }

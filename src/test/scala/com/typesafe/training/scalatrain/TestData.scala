@@ -45,6 +45,11 @@ object TestData {
     schedule724
   )
 
+
+  val xmas = (new DateTime).withYear(2014).withMonthOfYear(12).withDayOfMonth(25) //nyd.getDayOfWeek = 4
+  val nyd = (new DateTime).withYear(2014).withMonthOfYear(12).withDayOfMonth(31) //nyd.getDayOfWeek = 3
+  val nye = (new DateTime).withYear(2015).withMonthOfYear(1).withDayOfMonth(1) //nyd.getDayOfWeek = 4
+
   val schedule726 = Schedule(Seq(
       (ice726MunichTime, munich, 15.0),
       (ice726NurembergTime, nuremberg,5.0),
@@ -52,7 +57,8 @@ object TestData {
       (ice726CologneTime, essen,0.0)
     ),
     Set(1,6, 7),
-    Set(new DateTime("20141225"), new DateTime("20141231"), new DateTime("20150101"))
+    //Set(new DateTime("20141225"), new DateTime("20141231"), new DateTime("20150101"))
+    Set(xmas, nyd, nye)
   )
 
   val ice726 = Train(
@@ -70,7 +76,8 @@ object TestData {
       (ice728FrankfurtTime, frankfurt, 0.0)
     ),
   Set(1,2,3,5,6,7),
-  Set(new DateTime("20141225"))
+  Set(xmas)
+  //Set(new DateTime("20141225"))
   )
 
  val ice728 = Train(

@@ -65,27 +65,27 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
 
   "Listing trains on 2014-12-25" should {
     "only return the ICE724 train" in {
-      plannerAllTrains.listTrainsOnDate(new DateTime("20141225")) shouldEqual Set(ice724)
+      plannerAllTrains.listTrainsOnDate(xmas) shouldEqual Set(ice724)
     }
   }
 
   "Listing trains on 2014-12-31" should {
     "only return {ICE724, ICE728}" in {
-      plannerAllTrains.listTrainsOnDate(new DateTime("20141231")) shouldEqual Set(ice724, ice728)
+      plannerAllTrains.listTrainsOnDate(nyd) shouldEqual Set(ice724, ice728)
     }
   }
 
   "Listing trains on 2015-01-01" should {
     "only return {ICE724}" in {
-      plannerAllTrains.listTrainsOnDate(new DateTime("20141225")) shouldEqual Set(ice724)
+      plannerAllTrains.listTrainsOnDate(nye) shouldEqual Set(ice724)
     }
   }
 
   "Planning a trip from Munich to Frankfurt on 2014-12-31" should {
-    "only return {ICE724, ice728}" in {
+    "only return {ICE724, ICE728}" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
       val Route728 = Seq(Hop(munich, frankfurt, ice728))
-      plannerAllTrains.planByDate(munich, frankfurt, (new DateTime("20141231"))) shouldEqual Set(Route724, Route728)
+      plannerAllTrains.planByDate(munich, frankfurt, nyd) shouldEqual Set(Route724, Route728)
     }
   }
 
