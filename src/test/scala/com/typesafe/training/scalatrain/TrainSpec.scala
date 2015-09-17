@@ -46,6 +46,14 @@ class TrainSpec extends WordSpec with Matchers {
       an[IAE] should be thrownBy Train(InterCityExpress(724), Vector())
       an[IAE] should be thrownBy Train(InterCityExpress(724), Vector(ice724MunichTime -> munich))
     }
+
+    "check the scheudle time is sorted by departure time already" in {
+      an[IAE] should be thrownBy Train(InterCityExpress(724), Vector(ice724MunichTime -> munich, ice724MunichTime -> frankfurt))
+    }
+
+    "check the scheudle time has no duplicate stations, i.e., cycle" in{
+      an[IAE] should be thrownBy Train(InterCityExpress(724), Vector(ice724MunichTime -> munich, ice724NurembergTime -> munich))
+    }
   }
 
   "stations" should {
