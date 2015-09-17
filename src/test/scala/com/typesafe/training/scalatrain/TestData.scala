@@ -32,23 +32,23 @@ object TestData {
 
   val ice726CologneTime = Time(13, 2)
 
-  val ice724 = Train.freeSchedule(
+  val ice724 = Train(
     InterCityExpress(724),
     Vector(
-      ice724MunichTime -> munich,
-      ice724NurembergTime -> nuremberg,
-      ice724FrankfurtTime -> frankfurt,
-      ice724CologneTime -> cologne
+      (ice724MunichTime, munich, 10.0),
+      (ice724NurembergTime, nuremberg, 5.0),
+      (ice724FrankfurtTime, frankfurt, 5.0),
+      (ice724CologneTime, cologne, 0)
     )
   )
 
-  val ice726 = Train.freeSchedule(
+  val ice726 = Train(
     InterCityExpress(726),
     Vector(
-      ice726MunichTime -> munich,
-      ice726NurembergTime -> nuremberg,
-      ice726FrankfurtTime -> frankfurt,
-      ice726CologneTime -> essen
+      (ice726MunichTime, munich, 15.0),
+      (ice726NurembergTime, nuremberg,5.0),
+      (ice726FrankfurtTime, frankfurt,5.0),
+      (ice726CologneTime, essen,0)
     )
   )
 
@@ -57,11 +57,11 @@ object TestData {
   val ice728FrankfurtTime = Time(10, 10)
 
 
- val ice728 = Train.freeSchedule(
+ val ice728 = Train(
     InterCityExpress(728),
     Vector(
-      ice728MunichTime -> munich,
-      ice728FrankfurtTime -> frankfurt
+      (ice728MunichTime, munich, 25),
+      (ice728FrankfurtTime, frankfurt, 0)
     )
   )
 
