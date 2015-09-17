@@ -11,7 +11,8 @@ resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/
 
 libraryDependencies ++= Dependencies.scalaTrain
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.1.4" % "test"
+  "org.scalatest" %% "scalatest" % "2.1.4" % "test",
+  "com.github.nscala-time" %% "nscala-time" % "2.2.0"
 )
 
 scalacOptions ++= List(
