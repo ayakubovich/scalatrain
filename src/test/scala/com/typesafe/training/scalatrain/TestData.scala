@@ -52,6 +52,19 @@ object TestData {
     )
   )
 
+  val ice728MunichTime = Time(8, 50)
+
+  val ice728FrankfurtTime = Time(10, 10)
+
+
+ val ice728 = Train(
+    InterCityExpress(728),
+    Vector(
+      ice728MunichTime -> munich,
+      ice728FrankfurtTime -> frankfurt
+    )
+  )
+
   val planner = new JourneyPlanner(Set(ice724, ice726))
 
 }
