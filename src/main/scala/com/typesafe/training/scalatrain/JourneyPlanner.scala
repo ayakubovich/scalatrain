@@ -22,7 +22,7 @@ class JourneyPlanner(val trains:Set[Train]){
   def stopsAt(station:Station):Set[Tuple2[Time, Train]] =
     for {
       train <- trainsAt(station)
-      (time, st) <- train.schedule if st == station
+      (time, st, _) <- train.schedule if st == station
     }
     yield
     (time, train)
