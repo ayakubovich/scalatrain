@@ -32,7 +32,7 @@ object TestData {
 
   val ice726CologneTime = Time(13, 2)
 
-  val ice724 = Train(
+  val ice724 = Train.freeSchedule(
     InterCityExpress(724),
     Vector(
       ice724MunichTime -> munich,
@@ -42,7 +42,7 @@ object TestData {
     )
   )
 
-  val ice726 = Train(
+  val ice726 = Train.freeSchedule(
     InterCityExpress(726),
     Vector(
       ice726MunichTime -> munich,
@@ -57,7 +57,7 @@ object TestData {
   val ice728FrankfurtTime = Time(10, 10)
 
 
- val ice728 = Train(
+ val ice728 = Train.freeSchedule(
     InterCityExpress(728),
     Vector(
       ice728MunichTime -> munich,
