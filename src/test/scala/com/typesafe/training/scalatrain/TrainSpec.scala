@@ -74,6 +74,15 @@ class TrainSpec extends WordSpec with Matchers {
     }
   }
 
+  "Taking the 724 from Munich to Frankfurt" should {
+    "cost" +
+      "" in {
+      ice724.genHop(munich, nuremberg, Time(8)) shouldEqual Seq(Hop(munich, nuremberg, ice724))
+    }
+  }
+
+
+
 }
 
 import org.scalatest.{ Matchers, WordSpec }

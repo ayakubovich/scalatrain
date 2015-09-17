@@ -42,15 +42,27 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
     }
   }
 
-  "Sorting routes" should {
-    "sort paths in the order of total cost" in {
+  "Sorting routes from Munich to Frankfurt by price" should {
+    "return the ICE724 before the ICE728 express" in {
+      val cheapPath = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
+      val priceyPath = Seq(Hop(munich, frankfurt, ice728))
+
+      val pathSet = Set(cheapPath, priceyPath)
+      JourneyPlanner.sortPathsByPrice(pathSet) shouldEqual Seq(cheapPath, priceyPath)
+    }
+  }
+  
+
+  "Sorting routes from Munich to Frankfurt by time" should {
+    "return the the ICE728 express before the ICE724" in {
       val slowPath = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
       val fastPath = Seq(Hop(munich, frankfurt, ice728))
 
       val pathSet = Set(slowPath, fastPath)
-      JourneyPlanner.sortPaths(pathSet) shouldEqual Seq(fastPath, slowPath)
+      JourneyPlanner.sortPathsByTime(pathSet) shouldEqual Seq(fastPath, slowPath)
     }
   }
+
 
   "planning route" should {
     "return all possible routes that departs after user's departure" in {

@@ -20,4 +20,10 @@ class HopSpec extends WordSpec with Matchers {
     }
   }
 
+  "A hop from Munich to Nuremberg on the ICE724" should {
+    "cost $10" in {
+      Hop(munich, nuremberg, ice724).price shouldEqual 10.0
+    }
+  }
+
 }
