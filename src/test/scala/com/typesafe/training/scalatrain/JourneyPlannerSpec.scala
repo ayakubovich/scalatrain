@@ -99,4 +99,12 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
     }
   }
 
+  "sink station" should {
+    "return station that is no departure station of another train" in {
+      planner.sinkStations shouldEqual Set(cologne, essen)
+      plannerAllTrains.sinkStations shouldEqual Set(cologne, essen)
+
+    }
+  }
+
 }
