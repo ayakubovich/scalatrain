@@ -14,6 +14,8 @@ case class Hop (from: Station, to: Station, train: Train) {
 
   require(departure < arrival)
 
+  val price = train.price(from)
+
   //override lazy val toString = from.toString + "-" + to.toString
   override lazy val toString =  s"${from.toString} -${to.toString}"
 }
