@@ -1,4 +1,5 @@
 package com.typesafe.training.scalatrain
+import com.github.nscala_time.time.Imports._
 
 class JourneyPlanner(val trains:Set[Train]){
   val stations = trains.flatMap(_.stations)
@@ -18,6 +19,13 @@ class JourneyPlanner(val trains:Set[Train]){
     }
     )
   }
+
+  /*
+  def ListTrainsOnDate(dt:DateTime) = {
+    trains.filter(x => x.schedule.reccuring contains dt.getDayOfWeek &&
+      !(x.schedule.exceptionDates contains dt))
+  }
+  */
 
   def stopsAt(station:Station):Set[(Time, Train)] =
     for {
