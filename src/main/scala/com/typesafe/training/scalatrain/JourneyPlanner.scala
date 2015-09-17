@@ -32,3 +32,8 @@ class JourneyPlanner(val trains:Set[Train]){
 
   val hops:Map[Station, Set[Hop]] = trains.flatMap(_.hops).groupBy(_.from)
 }
+
+object JourneyPlanner {
+
+  def sortPaths (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{ case path: Seq[Hop] => path(path.size-1).arrival - path(0).departure}
+}

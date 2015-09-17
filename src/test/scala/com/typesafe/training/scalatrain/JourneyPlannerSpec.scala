@@ -41,4 +41,14 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
       planner.isShortTrip(nuremberg, essen) shouldBe true
     }
   }
+
+  "Sorting routes" should {
+    "sort paths in the order of total cost" in {
+      val slowPath = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
+      val fastPath = Seq(Hop(munich, frankfurt, ice728))
+
+      val pathSet = Set(slowPath, fastPath)
+      JourneyPlanner.sortPaths(pathSet) shouldEqual Seq(fastPath, slowPath)
+    }
+  }
 }
