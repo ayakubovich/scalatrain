@@ -41,21 +41,6 @@ class TrainSpec extends WordSpec with Matchers {
     }
   }
 
-  "Creating a Train" should {
-    "throw an IllegalArgumentException for a schedule with 0 or 1 elements" in {
-      an[IAE] should be thrownBy Train.freeSchedule(InterCityExpress(724), Vector())
-      an[IAE] should be thrownBy Train.freeSchedule(InterCityExpress(724), Vector(ice724MunichTime -> munich))
-    }
-
-    "check the schedule time is sorted by departure time already" in {
-      an[IAE] should be thrownBy Train.freeSchedule(InterCityExpress(724), Vector(ice724NurembergTime -> munich, ice724MunichTime -> frankfurt))
-    }
-
-    "check the schedule time has no duplicate stations, i.e., cycle" in{
-      an[IAE] should be thrownBy Train.freeSchedule(InterCityExpress(724), Vector(ice724MunichTime -> munich, ice724NurembergTime -> munich))
-    }
-  }
-
   "stations" should {
     "be initialized correctly" in {
       ice724.stations shouldEqual Vector(munich, nuremberg, frankfurt, cologne)
