@@ -36,4 +36,6 @@ class JourneyPlanner(val trains:Set[Train]){
 object JourneyPlanner {
 
   def sortPaths (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{ case path: Seq[Hop] => path(path.size-1).arrival - path(0).departure}
+
+  //def sortPathsByName (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{ case path: Seq[Hop] => path(path.size-1).arrival - path(0).departure}
 }
