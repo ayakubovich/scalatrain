@@ -10,7 +10,7 @@ case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Set[Int] 
 
   require(schedule.map(_._2).distinct.size == schedule.map(_._2).size, "no cycle in overall path")
 
-  require(recurring.forall(_ >= 0), "enum value cant be negative")
+  require(recurring.forall(x => x >= 1 && x <=7), "day of the week must be an integer from 1 to 7")
 
   val stations: Seq[Station] = schedule.map(_._2)
 
@@ -18,5 +18,5 @@ case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Set[Int] 
 
   def timeAt(station: Station): Option[Time] =
     schedule.find(stop => stop._2 == station).map(found => found._1)
-  
+
 }
