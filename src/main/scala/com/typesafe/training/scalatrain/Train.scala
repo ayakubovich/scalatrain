@@ -25,7 +25,6 @@ case class Train(info:TrainInfo, schedule:Seq[(Time, Station)]) {
 
 
   def backToBack: Seq[(Station, Station)] = {
-    val stations = schedule.map(_._2)
     stations.zip(stations.tail)
   }
 
