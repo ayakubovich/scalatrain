@@ -81,6 +81,14 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
     }
   }
 
+  "Planning a trip from Munich to Frankfurt on 2014-12-31" should {
+    "only return {ICE724, ice728}" in {
+      val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
+      val Route728 = Seq(Hop(munich, frankfurt, ice728))
+      plannerAllTrains.planByDate(munich, frankfurt, (new DateTime("20141231"))) shouldEqual Set(Route724, Route728)
+    }
+  }
+
   "planning route" should {
     "return all possible routes that departs after user's departure" in {
       planner.planByTime(munich, frankfurt, Time(10,10)) shouldEqual Set()
