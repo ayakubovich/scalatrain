@@ -60,6 +60,12 @@ class TrainSpec extends WordSpec with Matchers {
     }
   }
 
+  "Generating all hops from Munich to Nuremberg at 9:00" should {
+    "return a single hop on train ice724" in {
+      ice724.genHop(munich, nuremberg, Time(9)) shouldEqual Hop(munich, nuremberg, ice724)
+    }
+  }
+
 }
 
 import org.scalatest.{ Matchers, WordSpec }
