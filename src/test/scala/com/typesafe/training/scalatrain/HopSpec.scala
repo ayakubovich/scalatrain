@@ -3,6 +3,9 @@
  */
 
 package com.typesafe.training.scalatrain
+
+import java.util.NoSuchElementException
+
 import org.scalatest.{ Matchers, WordSpec }
 import TestData._
 import java.lang.{ IllegalArgumentException => IAE }
@@ -23,6 +26,15 @@ class HopSpec extends WordSpec with Matchers {
   "A hop from Munich to Nuremberg on the ICE724" should {
     "cost $10" in {
       Hop(munich, nuremberg, ice724).price shouldEqual 10.0
+    }
+  }
+
+  "Hop should return distance" should {
+    "between munich and nuremberg" in {
+      Hop(munich, nuremberg, ice724).kms shouldEqual 1.1
+    }
+    "between nuremberg and munich" in {
+      an [NoSuchElementException] should be thrownBy Hop(munich, cologne, ice724).kms
     }
   }
 

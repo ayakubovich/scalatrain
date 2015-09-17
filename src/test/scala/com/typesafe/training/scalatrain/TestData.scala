@@ -32,6 +32,13 @@ object TestData {
 
   val ice726CologneTime = Time(13, 2)
 
+  val dists = Map(
+    (munich, nuremberg) -> 1.1,
+    (munich, frankfurt) -> 2.2,
+      (nuremberg, frankfurt) -> 10.1,
+    (frankfurt, cologne) -> 100.1,
+    (frankfurt, essen) -> 1000.1
+  )
   val schedule724 = Schedule(Seq(
       (ice724MunichTime, munich, 10.0),
       (ice724NurembergTime, nuremberg, 5.0),
@@ -42,7 +49,8 @@ object TestData {
 
   val ice724 = Train(
     InterCityExpress(724),
-    schedule724
+    schedule724,
+  dists
   )
 
 
@@ -63,7 +71,8 @@ object TestData {
 
   val ice726 = Train(
     InterCityExpress(726),
-    schedule726
+    schedule726,
+  dists
   )
 
   val ice728MunichTime = Time(8, 50)
@@ -82,7 +91,8 @@ object TestData {
 
  val ice728 = Train(
     InterCityExpress(728),
-    schedule728
+    schedule728,
+  dists
  )
 
   val planner = new JourneyPlanner(Set(ice724, ice726))
