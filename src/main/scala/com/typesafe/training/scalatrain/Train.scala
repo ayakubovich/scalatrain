@@ -10,6 +10,10 @@ case class Train(info:TrainInfo, schedule:Seq[(Time, Station)]) {
 
   require(scheduleSorted)
 
+  val scheduleNoCycle = schedule.groupBy(_._2).forall(_._2.size == 1)
+
+  require(scheduleNoCycle)
+
   val stations: Seq[Station] = schedule.map(_._2)
 
   def timeAt(station: Station): Option[Time] =
