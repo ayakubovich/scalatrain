@@ -6,7 +6,7 @@ package com.typesafe.training.scalatrain
  */
 
 
-case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Seq[Int] = Nil){
+case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Seq[Int] = Nil, exceptionDate:Seq[DateTime] = Nil){
 
   require(schedule.length > 1, "Required schedule to be of sequence of length > 2, got a sequence of length " + schedule.length)
   require(schedule.forall(_._3 >= 0), "Price can not be negative")
@@ -14,7 +14,6 @@ case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Seq[Int] 
   require(schedule.map(_._1).sorted == schedule.map(_._1), "times should be sorted")
 
   require(schedule.map(_._2).distinct.size == schedule.map(_._2).size, "no cycle in overall path")
-
 
   val stations: Seq[Station] = schedule.map(_._2)
 
