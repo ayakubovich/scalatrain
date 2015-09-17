@@ -39,6 +39,12 @@ class JourneyPlanner(val trains:Set[Train]){
     listTrainsOnDate(dt).map(_.genHop(from, to , Time(0))).filterNot(_.isEmpty)
 
   val hops:Map[Station, Set[Hop]] = trains.flatMap(_.hops).groupBy(_.from)
+
+  val sinkStations:Set[Station]= {
+    val candidates = trains.map(_.stations.last)
+    val negatives = trains.flatMap(_.stations.reverse.tail)
+    candidates.diff(negatives)
+  }
 }
 
 object JourneyPlanner {
