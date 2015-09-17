@@ -1,12 +1,12 @@
 package com.typesafe.training.scalatrain
-
+import com.github.nscala_time.time.Imports._
 
 /**
  * Created by georgeli on 15-09-17.
  */
 
 
-case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Seq[Int] = Nil, exceptionDate:Seq[DateTime] = Nil){
+case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Set[Int] = Set.empty, exceptionDate:Set[DateTime] = Set.empty){
 
   require(schedule.length > 1, "Required schedule to be of sequence of length > 2, got a sequence of length " + schedule.length)
   require(schedule.forall(_._3 >= 0), "Price can not be negative")
@@ -21,5 +21,7 @@ case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Seq[Int] 
 
   def timeAt(station: Station): Option[Time] =
     schedule.find(stop => stop._2 == station).map(found => found._1)
+
+
 
 }
