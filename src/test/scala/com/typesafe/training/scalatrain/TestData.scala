@@ -3,7 +3,7 @@
  */
 
 package com.typesafe.training.scalatrain
-
+import com.github.nscala_time.time.Imports._
 object TestData {
 
   val munich = Station("Munich")
@@ -37,7 +37,7 @@ object TestData {
       (ice724NurembergTime, nuremberg, 5.0),
       (ice724FrankfurtTime, frankfurt, 5.0),
       (ice724CologneTime, cologne, 0.0)
-    )
+    ), Set(1,2,3,4,5,6,7)
   )
 
   val ice724 = Train(
@@ -50,7 +50,9 @@ object TestData {
       (ice726NurembergTime, nuremberg,5.0),
       (ice726FrankfurtTime, frankfurt,5.0),
       (ice726CologneTime, essen,0.0)
-    )
+    ),
+    Set(1,6, 7),
+    Set(new DateTime("20141225"), new DateTime("20141231"), new DateTime("20150101"))
   )
 
   val ice726 = Train(
@@ -66,7 +68,9 @@ object TestData {
      Vector(
       (ice728MunichTime, munich, 25.0),
       (ice728FrankfurtTime, frankfurt, 0.0)
-    )
+    ),
+  Set(1,2,3,5,6,7),
+  Set(new DateTime("20141225"))
   )
 
  val ice728 = Train(
@@ -75,5 +79,6 @@ object TestData {
  )
 
   val planner = new JourneyPlanner(Set(ice724, ice726))
+  val plannerAllTrains = new JourneyPlanner(Set(ice724, ice726, ice728))
 
 }

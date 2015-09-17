@@ -20,7 +20,7 @@ class JourneyPlanner(val trains:Set[Train]){
     )
   }
 
-  def ListTrainsOnDate(dt:DateTime) = {
+  def listTrainsOnDate(dt:DateTime):Set[Train] = {
     trains.filter(x => (x.schedule.recurring contains dt.getDayOfWeek) &&
       !(x.schedule.exceptionDates contains dt))
   }

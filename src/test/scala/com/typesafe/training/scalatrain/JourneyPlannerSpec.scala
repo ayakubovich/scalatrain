@@ -7,7 +7,7 @@ package com.typesafe.training.scalatrain
 import TestData._
 import java.lang.{ IllegalArgumentException => IAE }
 import org.scalatest.{ Matchers, WordSpec }
-
+import com.github.nscala_time.time.Imports._
 class JourneyPlannerSpec extends WordSpec with Matchers {
 
   "stations" should {
@@ -63,14 +63,22 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
     }
   }
 
-
-  "planning route" should {
-    "return all possible routes that departs after user's departure" in {
-      planner.plan(munich, frankfurt, Time(10,10)) shouldEqual Set()
-      val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      planner.plan(munich, frankfurt, Time(8,49)) shouldEqual Set(Route724)
-      val Route726 = Seq(Hop(munich, nuremberg, ice726), Hop(nuremberg, frankfurt, ice726))
-      planner.plan(munich, frankfurt, Time(7,49)) shouldEqual Set(Route724, Route726)
+  "Listing trains on 2014-12-25" should {
+    "only return the ICE724 train" in {
+      plannerAllTrains.listTrainsOnDate(new DateTime("20141225")) shouldEqual Set(ice724)
     }
   }
+
+  "Listing trains on 2014-12-31" should {
+    "only return {ICE724, ICE728}" in {
+      plannerAllTrains.listTrainsOnDate(new DateTime("20141231")) shouldEqual Set(ice724, ice728)
+    }
+  }
+
+  "Listing trains on 2015-01-01" should {
+    "only return {ICE724}" in {
+      plannerAllTrains.listTrainsOnDate(new DateTime("20141225")) shouldEqual Set(ice724)
+    }
+  }
+
 }
