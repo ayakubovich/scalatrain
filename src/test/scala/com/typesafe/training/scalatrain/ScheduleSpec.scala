@@ -23,9 +23,9 @@ class ScheduleSpec  extends WordSpec with Matchers {
       an[IAE] should be thrownBy Schedule(Seq((ice724MunichTime , munich,0.0), (ice724NurembergTime , munich, 0.0)))
     }
 
-    "check that days of the week values are non-negative" in {
+    "check that days of the week values are integers from 1 to 7" in {
       an[IAE] should be thrownBy Schedule(Seq((ice724MunichTime , munich,0.0), (ice724NurembergTime , nuremberg, 0.0)),
-        Set(1, 2, 3,-4, 5))
+        Set(0, 1, 2, 3,-4, 5, 11))
     }
   }
 }
