@@ -48,7 +48,7 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
       val fastPath = Seq(Hop(munich, frankfurt, ice728))
 
       val pathSet = Set(slowPath, fastPath)
-      JourneyPlanner.sortPaths(pathSet) shouldEqual Seq(fastPath, slowPath)
+      JourneyPlanner.sortPathsByTime(pathSet) shouldEqual Seq(fastPath, slowPath)
     }
   }
 
