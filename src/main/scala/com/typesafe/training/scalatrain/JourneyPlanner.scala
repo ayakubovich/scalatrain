@@ -19,13 +19,12 @@ class JourneyPlanner(val trains:Set[Train]){
     )
   }
 
-  def stopsAt(station:Station):Set[Tuple2[Time, Train]] =
+  def stopsAt(station:Station):Set[(Time, Train)] =
     for {
       train <- trainsAt(station)
-      (time, st, _) <- train.schedule if st == station
     }
     yield
-    (time, train)
+    (train.timeAt(station).get, train)
 
   def plan(from: Station, to: Station, departure: Time): Set[Seq[Hop]] =
     trains.map(_.genHop(from, to , departure)).filterNot(_.isEmpty)
