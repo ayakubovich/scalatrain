@@ -63,7 +63,7 @@ object JourneyPlanner {
   def pathPriceOnDate (path:Seq[Hop], journeyDate:DateTime, currency: Currency = CAD(1.0)):Price = {
     //TODO: verify that journeyDate is after current date
     val dayUntilJourney= Days.daysBetween(DateTime.now, journeyDate).getDays
-    Price(pathPrice(path) * findDiscount(dayUntilJourney), currency)
+    Price(pathPrice(path) * findDiscount(dayUntilJourney) * currency.exchangeRate, currency)
   }
 
   def sortPathsByPrice (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{case path => pathPrice(path)}

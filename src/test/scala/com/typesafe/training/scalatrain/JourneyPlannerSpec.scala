@@ -97,9 +97,9 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
   }
 
   "Taking the ICE724 from Munich to Frankfurt next week" should {
-    "cost 150% x $15 = $22.5" in {
+    "cost 150% x $15 = $225 USD, 1 CAD = 15 USD" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(7), USD()) shouldEqual Price(22.5, USD())
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(7), USD()) shouldEqual Price(225, USD())
     }
   }
 
