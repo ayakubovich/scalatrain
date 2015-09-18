@@ -6,7 +6,7 @@ case class Train(info:TrainInfo, schedule:Schedule, dist: Map[(Station,Station),
 
   val stations: Seq[Station] = schedule.stations
 
-  def price (station: Station):Double = schedule.price(station)
+  def price (station: Station): Double = schedule.price(station)
 
   def timeAt(station: Station): Option[Time] = schedule.timeAt(station)
 
