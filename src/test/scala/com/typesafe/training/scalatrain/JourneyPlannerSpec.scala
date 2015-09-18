@@ -43,6 +43,7 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
     }
   }
 
+
   "Sorting routes from Munich to Frankfurt by price" should {
     "return the ICE724 before the ICE728 express" in {
       val cheapPath = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
@@ -52,7 +53,6 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
       JourneyPlanner.sortPathsByPrice(pathSet) shouldEqual Seq(cheapPath, priceyPath)
     }
   }
-  
 
   "Sorting routes from Munich to Frankfurt by time" should {
     "return the the ICE728 express before the ICE724" in {
@@ -92,21 +92,21 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
   "Taking the ICE724 from Munich to Frankfurt today" should {
     "cost 75% x $15 = $11.25" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now) shouldEqual 11.25
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now) shouldEqual Price(11.25)
     }
   }
 
   "Taking the ICE724 from Munich to Frankfurt next week" should {
     "cost 150% x $15 = $22.5" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(7)) shouldEqual 22.5
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(7), USD()) shouldEqual Price(22.5, USD())
     }
   }
 
   "Taking the ICE724 from Munich to Frankfurt in two weeks" should {
     "cost 100% x $15 = $15" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(14)) shouldEqual 15
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(14)) shouldEqual Price(15)
     }
   }
 

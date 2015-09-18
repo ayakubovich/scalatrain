@@ -52,19 +52,18 @@ object JourneyPlanner {
 
   def pathDuration (path:Seq[Hop]):Double = path(path.size-1).arrival - path(0).departure
 
-  def pathPrice (path:Seq[Hop]):Double = path.map(_.price).sum
+  private def pathPrice (path:Seq[Hop]):Double = path.map(_.price).sum
 
   def findDiscount(daysUntilJourney: Int) = Double match {
     case _ if daysUntilJourney >= 14 => 1
     case _ if daysUntilJourney >  1 && daysUntilJourney < 14 => 1.5
     case _ if daysUntilJourney >= 0 && daysUntilJourney <=1  => 0.75
-    case _ => 1 //TODO: make this throw an exception later
   }
 
-  def pathPriceOnDate (path:Seq[Hop], journeyDate:DateTime):Double = {
+  def pathPriceOnDate (path:Seq[Hop], journeyDate:DateTime, currency: Currency = CAD(1.0)):Price = {
     //TODO: verify that journeyDate is after current date
     val dayUntilJourney= Days.daysBetween(DateTime.now, journeyDate).getDays
-    pathPrice(path) * findDiscount(dayUntilJourney)
+    Price(pathPrice(path) * findDiscount(dayUntilJourney), currency)
   }
 
   def sortPathsByPrice (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{case path => pathPrice(path)}

@@ -78,9 +78,6 @@ class TrainSpec extends WordSpec with Matchers {
       ice728.distanceSinceLastMaintained(jan27) should (be < 61.60001 and be > 59.9999)
     }
   }
-
-
-
 }
 
 import org.scalatest.{ Matchers, WordSpec }
