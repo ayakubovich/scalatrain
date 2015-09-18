@@ -22,6 +22,9 @@ case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Set[Int] 
     schedule.find(stop => stop._2 == station).map(found => found._1)
 
   def numDaysTravelledBetween2Dates(date1:DateTime, date2:DateTime):Int= {
+
+    require(date2 > date1, "Require second date to be greater or equal to the first!")
+
     val week = Set(1,2,3,4,5,6,7)
     val partialWeek1 = week.filter(_>=date1.getDayOfWeek)
     val partialWeek2 = week.filter(_<=date2.getDayOfWeek)
