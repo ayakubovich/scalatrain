@@ -1,5 +1,6 @@
 package com.typesafe.training.scalatrain
 import com.github.nscala_time.time.Imports._
+import org.joda.time.Days
 
 class JourneyPlanner(val trains:Set[Train]){
   val stations = trains.flatMap(_.stations)
@@ -49,10 +50,24 @@ class JourneyPlanner(val trains:Set[Train]){
 
 object JourneyPlanner {
 
-  def sortPathsByTime (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{ case path: Seq[Hop] => path(path.size-1).arrival - path(0).departure}
+  def pathDuration (path:Seq[Hop]):Double = path(path.size-1).arrival - path(0).departure
 
-  def sortPathsByPrice (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{ case path: Seq[Hop] => path.map(_.price).sum}
+  def pathPrice (path:Seq[Hop]):Double = path.map(_.price).sum
 
-  //def applyDateDiscountToPrice(paths, date):Set[Seq[Hop]]
+  def findDiscount(daysUntilJourney: Int) = Double match {
+    case _ if daysUntilJourney >= 14 => 1
+    case _ if daysUntilJourney >  1 && daysUntilJourney < 14 => 1.5
+    case _ if daysUntilJourney >= 0 && daysUntilJourney <=1  => 0.75
+    case _ => -1 //TODO: make this throw an exception later
+  }
 
+  def pathPriceOnDate (path:Seq[Hop], journeyDate:DateTime):Double = {
+    //TODO: verify that journeyDate is after current date
+    val dayUntilJourney= Days.daysBetween(DateTime.now, journeyDate).getDays
+    pathPrice(path) * findDiscount(dayUntilJourney)
+  }
+
+  def sortPathsByPrice (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{case path => pathPrice(path)}
+
+  def sortPathsByTime (paths: Set[Seq[Hop]]) = paths.toSeq.sortBy{case path => pathDuration(path)}
 }
