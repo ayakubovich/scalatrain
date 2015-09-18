@@ -12,6 +12,8 @@ case class Schedule (schedule:Seq[(Time, Station, Double)], recurring: Set[Int] 
 
   require(recurring.forall(x => x >= 1 && x <=7), "day of the week must be an integer from 1 to 7")
 
+  require(exceptionDates.forall(date => recurring(date.getDayOfWeek)))
+
   val stations: Seq[Station] = schedule.map(_._2)
 
   def price (station: Station):Double = schedule.find(_._2 == station).get._3
