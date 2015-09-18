@@ -27,5 +27,12 @@ class ScheduleSpec  extends WordSpec with Matchers {
       an[IAE] should be thrownBy Schedule(Seq((ice724MunichTime , munich,0.0), (ice724NurembergTime , nuremberg, 0.0)),
         Set(0, 1, 2, 3,-4, 5, 11))
     }
+
+    "check that between Dec 25 2014 and Jan 27 2015, the ICE728" should {
+      "travel exactly 28 days" in {
+        ice728.schedule.numDaysTravelledBetween2Dates(xmas, jan27) shouldEqual 28
+      }
+    }
+
   }
 }

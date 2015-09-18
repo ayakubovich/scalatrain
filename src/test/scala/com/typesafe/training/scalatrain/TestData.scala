@@ -57,6 +57,7 @@ object TestData {
   val xmas = (new DateTime).withYear(2014).withMonthOfYear(12).withDayOfMonth(25) //nyd.getDayOfWeek = 4
   val nyd = (new DateTime).withYear(2014).withMonthOfYear(12).withDayOfMonth(31) //nyd.getDayOfWeek = 3
   val nye = (new DateTime).withYear(2015).withMonthOfYear(1).withDayOfMonth(1) //nyd.getDayOfWeek = 4
+  val jan27 = (new DateTime).withYear(2015).withMonthOfYear(1).withDayOfMonth(27) //nyd.getDayOfWeek = 4
 
   val schedule726 = Schedule(Seq(
       (ice726MunichTime, munich, 15.0),
