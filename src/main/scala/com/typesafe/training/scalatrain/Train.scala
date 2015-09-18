@@ -6,7 +6,7 @@ case class Train(info:TrainInfo, schedule:Schedule, dist: Map[(Station,Station),
 
   val stations: Seq[Station] = schedule.stations
 
-  val distancePerDay: Double = dist.map(_._2).sum
+  val distancePerDay: Double = dist.filter{case (x,y)  => backToBack contains x}.map(_._2).sum
 
   def price (station: Station):Double = schedule.price(station)
 
@@ -22,7 +22,9 @@ case class Train(info:TrainInfo, schedule:Schedule, dist: Map[(Station,Station),
 
   def kms(from:Station, to:Station) = dist(from, to)
 
-  def distanceSinceLastMaintained(dt:DateTime):Double = schedule.numDaysTravelledBetween2Dates(DateTime.now,dt) * distancePerDay
+  def distanceSinceLastMaintained(dt:DateTime):Double = {
+    schedule.numDaysTravelledBetween2Dates(info.lastMaintained.get, dt) * distancePerDay
+  }
 }
 
 case class Station(name:String)
