@@ -71,8 +71,8 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
   }
 
   "Listing trains on 2014-12-31" should {
-    "only return {ICE724, ICE728}" in {
-      plannerAllTrains.listTrainsOnDate(nyd) shouldEqual Set(ice724, ice728)
+    "only return {ICE724}" in {
+      plannerAllTrains.listTrainsOnDate(nyd) shouldEqual Set(ice724)
     }
   }
 
@@ -83,10 +83,9 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
   }
 
   "Planning a trip from Munich to Frankfurt on 2014-12-31" should {
-    "only return {ICE724, ICE728}" in {
+    "only return {ICE724}" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      val Route728 = Seq(Hop(munich, frankfurt, ice728))
-      plannerAllTrains.planByDate(munich, frankfurt, nyd) shouldEqual Set(Route724, Route728)
+      plannerAllTrains.planByDate(munich, frankfurt, nyd) shouldEqual Set(Route724)
     }
   }
 

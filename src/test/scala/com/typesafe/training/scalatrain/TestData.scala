@@ -64,8 +64,8 @@ object TestData {
       (ice726FrankfurtTime, frankfurt,5.0),
       (ice726CologneTime, essen,0.0)
     ),
-    Set(1,6, 7),
-    Set(xmas, nyd, nye)
+    Set(1, 6, 7)
+    //Set(xmas, nyd, nye)
   )
 
   val ice726 = Train(
@@ -84,7 +84,7 @@ object TestData {
       (ice728FrankfurtTime, frankfurt, 0.0)
     ),
   Set(1,2,3,5,6,7),
-  Set(xmas)
+  Set(nyd)
   )
 
  val ice728 = Train(
