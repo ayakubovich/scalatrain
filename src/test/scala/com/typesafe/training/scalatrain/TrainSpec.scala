@@ -66,6 +66,19 @@ class TrainSpec extends WordSpec with Matchers {
     }
   }
 
+  "The 724" should {
+    "cost" +
+      "" in {
+      ice724.genHop(munich, nuremberg, Time(8)) shouldEqual Seq(Hop(munich, nuremberg, ice724))
+    }
+  }
+
+  "check that between on Jan 27, the ICE728" should {
+    "travel exactly 2.2 x 28 = 700 km since its last maintenance date (Dec 25 2014)" in {
+      ice728.distanceSinceLastMaintained(jan27) should (be < 61.60001 and be > 59.9999)
+    }
+  }
+
 
 
 }

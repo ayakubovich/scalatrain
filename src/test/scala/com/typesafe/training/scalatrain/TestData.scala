@@ -54,10 +54,10 @@ object TestData {
   )
 
 
-  val xmas = (new DateTime).withYear(2014).withMonthOfYear(12).withDayOfMonth(25) //nyd.getDayOfWeek = 4
+  val xmas = (new DateTime).withYear(2014).withMonthOfYear(12).withDayOfMonth(25) //xmas.getDayOfWeek = 4
   val nyd = (new DateTime).withYear(2014).withMonthOfYear(12).withDayOfMonth(31) //nyd.getDayOfWeek = 3
-  val nye = (new DateTime).withYear(2015).withMonthOfYear(1).withDayOfMonth(1) //nyd.getDayOfWeek = 4
-  val jan27 = (new DateTime).withYear(2015).withMonthOfYear(1).withDayOfMonth(27) //nyd.getDayOfWeek = 4
+  val nye = (new DateTime).withYear(2015).withMonthOfYear(1).withDayOfMonth(1) //nye.getDayOfWeek = 4
+  val jan27 = (new DateTime).withYear(2015).withMonthOfYear(1).withDayOfMonth(27) //jan27.getDayOfWeek = 2
 
   val schedule726 = Schedule(Seq(
       (ice726MunichTime, munich, 15.0),
@@ -89,7 +89,7 @@ object TestData {
   )
 
  val ice728 = Train(
-    InterCityExpress(728),
+    InterCityExpress(728, Some(xmas)),
     schedule728,
   dists
  )
