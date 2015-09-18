@@ -92,21 +92,26 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
   "Taking the ICE724 from Munich to Frankfurt today" should {
     "cost 75% x $15 = $11.25" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now) shouldEqual Price(11.25)
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now, exchangeRate = dummyExchangeRate) shouldEqual Price(11.25)
     }
+  }
+
+  def dummyExchangeRate(other: Currency) =  other match {
+    case USD => 10.0
+    case CAD => 1.0
   }
 
   "Taking the ICE724 from Munich to Frankfurt next week" should {
     "cost 150% x $15 = $225 USD, 1 CAD = 15 USD" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(7), USD()) shouldEqual Price(225, USD())
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(7), USD, dummyExchangeRate) shouldEqual Price(225, USD)
     }
   }
 
   "Taking the ICE724 from Munich to Frankfurt in two weeks" should {
     "cost 100% x $15 = $15" in {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
-      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(14)) shouldEqual Price(15)
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(15), exchangeRate = dummyExchangeRate) shouldEqual Price(15)
     }
   }
 
