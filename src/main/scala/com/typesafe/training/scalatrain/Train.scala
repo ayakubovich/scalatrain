@@ -2,7 +2,7 @@ package com.typesafe.training.scalatrain
 
 import com.github.nscala_time.time.Imports._
 
-case class Train(info:TrainInfo, schedule:Schedule) {
+case class Train(info:TrainInfo, schedule:Schedule, dist: Map[(Station,Station), Double]) {
 
   val stations: Seq[Station] = schedule.stations
 
@@ -17,6 +17,8 @@ case class Train(info:TrainInfo, schedule:Schedule) {
   def backToBack: Seq[(Station, Station)] = stations.zip(stations.tail)
 
   def hops: Seq[Hop] = backToBack.map { case (s1,s2) => Hop(s1,s2, this) }
+
+  def kms(from:Station, to:Station) = dist(from, to)
 }
 
 case class Station(name:String)
