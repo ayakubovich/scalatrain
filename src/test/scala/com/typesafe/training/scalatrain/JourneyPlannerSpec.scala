@@ -8,6 +8,7 @@ import TestData._
 import java.lang.{ IllegalArgumentException => IAE }
 import org.scalatest.{ Matchers, WordSpec }
 import com.github.nscala_time.time.Imports._
+import org.joda.time.Days
 class JourneyPlannerSpec extends WordSpec with Matchers {
 
   "stations" should {
@@ -86,6 +87,27 @@ class JourneyPlannerSpec extends WordSpec with Matchers {
       val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
       val Route728 = Seq(Hop(munich, frankfurt, ice728))
       plannerAllTrains.planByDate(munich, frankfurt, nyd) shouldEqual Set(Route724, Route728)
+    }
+  }
+
+  "Taking the ICE724 from Munich to Frankfurt today" should {
+    "cost 75% x $15 = $11.25" in {
+      val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now) shouldEqual 11.25
+    }
+  }
+
+  "Taking the ICE724 from Munich to Frankfurt next week" should {
+    "cost 150% x $15 = $22.5" in {
+      val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(7)) shouldEqual 22.5
+    }
+  }
+
+  "Taking the ICE724 from Munich to Frankfurt next week" should {
+    "cost 100% x $15 = $15" in {
+      val Route724 = Seq(Hop(munich, nuremberg, ice724), Hop(nuremberg, frankfurt, ice724))
+      JourneyPlanner.pathPriceOnDate(Route724, DateTime.now.plusDays(14)) shouldEqual 15
     }
   }
 

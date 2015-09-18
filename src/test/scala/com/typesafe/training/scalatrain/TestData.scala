@@ -57,7 +57,6 @@ object TestData {
       (ice726CologneTime, essen,0.0)
     ),
     Set(1,6, 7),
-    //Set(new DateTime("20141225"), new DateTime("20141231"), new DateTime("20150101"))
     Set(xmas, nyd, nye)
   )
 
@@ -77,7 +76,6 @@ object TestData {
     ),
   Set(1,2,3,5,6,7),
   Set(xmas)
-  //Set(new DateTime("20141225"))
   )
 
  val ice728 = Train(
