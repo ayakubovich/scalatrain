@@ -58,7 +58,7 @@ object JourneyPlanner {
     case _ if daysUntilJourney >= 14 => 1
     case _ if daysUntilJourney >  1 && daysUntilJourney < 14 => 1.5
     case _ if daysUntilJourney >= 0 && daysUntilJourney <=1  => 0.75
-    case _ => -1 //TODO: make this throw an exception later
+    case _ => 1 //TODO: make this throw an exception later
   }
 
   def pathPriceOnDate (path:Seq[Hop], journeyDate:DateTime):Double = {
